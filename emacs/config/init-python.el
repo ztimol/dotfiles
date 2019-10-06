@@ -12,3 +12,5 @@
   :bind (:map python-mode-map
               ("C-x , p" . pdb))
   )
+
+(provide 'init-python)

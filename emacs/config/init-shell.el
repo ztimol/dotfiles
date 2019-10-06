@@ -12,3 +12,4 @@
   (setq comint-input-ring-file-name "~/.bash_history")
   (comint-read-input-ring t)
   )
+(provide 'init-shell)

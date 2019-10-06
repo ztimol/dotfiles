@@ -1,3 +1,4 @@
+(require 'use-package)
 (use-package nginx-mode
   :ensure t
   )
@@ -9,3 +10,4 @@
   :ensure t)
 
 (provide 'init-config-files)
+;;; init-config-files.el ends here
