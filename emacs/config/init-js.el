@@ -1,8 +1,8 @@
 (require 'use-package)
 
-(use-package company-tern
-  :ensure t
-  )
+;; (use-package company-tern
+;;   :ensure t
+;;   )
 
 ;; (use-package import-js
 ;;   :ensure t

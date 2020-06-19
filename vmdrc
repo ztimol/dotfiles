@@ -1,0 +1,7 @@
+
+# position and turn on menus
+menu main on
+menu graphics on
+
+menu main move 5 10
+menu graphics move 5 300

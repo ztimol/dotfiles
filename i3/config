@@ -252,6 +252,7 @@ for_window [title="TeamViewer Panel"] floating enable, move absolute position 90
 for_window [title="TeamViewer"] floating enable, move absolute position 700 px 450 px
 for_window [title="Computers & Contacts"] floating enable, move absolute position 1250 px 450 px
 for_window [class="vlc"] floating enable
+for_window [class="*MEGAsync*"] floating enable
 #for_window [class="Caja"] floating enable
 for_window [title="vmd"] floating enable
 for_window [title="VMD Main"] floating enable

@@ -17,7 +17,7 @@ shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=100000
-HISTFILESIZE=2000
+HISTFILESIZE=20000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -142,11 +142,9 @@ function pdock() {
 function pdock-db_reset() {
     DOCKER_IMAGE=$(docker ps | grep `regex $1`  | awk '{print $2}')
     echo "${DOCKER_IMAGE}"
-    /home/timol/work/stint/deploy/deployer_temp/stint_dev/down_dev.sh
     docker exec -it `regex $1` psql -U postgres -d postgres -c "DROP DATABASE stint_api;"
     docker exec -it `regex $1` psql -U postgres -d postgres -c "CREATE DATABASE stint_api;"
     docker exec -it `regex $1` psql -U postgres -d postgres -c "GRANT ALL PRIVILEGES ON DATABASE stint_api TO dev;"
-    /home/timol/work/stint/deploy/deployer_temp/stint_dev/up_dev.sh
 }
 
 function rdock() {
@@ -178,4 +176,15 @@ function dockstop() {
     docker stop `regexstop $1`
 }
 
-export PATH=$PATH:~/.CBv2.1.31/CBv2.1.31/
+export PATH=$PATH:~/.CBv2.1.34/
+#export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH=$PATH:~/.NAMD_2.13_Linux-x86_64-multicore/
+alias vmdt='vmd -dispdev text'
+
+
+#eval "$(rbenv init -)"
+
+g09root=/home/timol/
+GAUSS_SCRDIR=$g09root/g09/scratch/
+export g09root GAUSS_SCRDIR
+. $g09root/g09/bsd/g09.profile
