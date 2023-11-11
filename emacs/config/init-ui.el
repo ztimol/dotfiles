@@ -183,5 +183,9 @@ This command does not push text to `kill-ring'."
   (setq comint-input-ring-file-name "~/dotfiles/bash_history")
   (comint-read-input-ring t))
 
+(set-face-foreground 'mode-line "black")
+(set-face-background 'mode-line "white")
+;;(set-face-background 'mode-line-inactive "light blue")
+
 (provide 'init-ui)
 ;;; init-ui.el ends here
