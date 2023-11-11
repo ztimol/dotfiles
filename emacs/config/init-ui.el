@@ -1,35 +1,95 @@
-;; auto insert closing bracket
-;;(electric-pair-mode 1)
+;; hide scrollbars and menus
+;; directory for self installed files
 
-;; make cursor movement stop in between camelCase words.
-(global-subword-mode 0) ;; 0 turns it off
+(setq create-lockfiles nil)
+(prefer-coding-system 'utf-8)
+(when (display-graphic-p)
+  (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
 
-;; turn on bracket match highlight
-(show-paren-mode 1)
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+(setq-default indent-tabs-mode nil)
+(fset 'yes-or-no-p 'y-or-n-p)
+(global-set-key [f6] 'revert-buffer )
 
-;; remember cursor position, for emacs 25.1 or later
-(save-place-mode 1)
+;; (setq inhibit-splash-screen t
+;;       initial-scratch-message nil
+;;       initial-major-mode 'org-mode)
 
-;; stop creating those backup~ files
-(setq make-backup-files nil)
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(delete-selection-mode t)
+(transient-mark-mode t)
+(setq select-enable-clipboard t)
+(setq column-number-mode t)
 
-;; stop creating those #auto-save# files
-(setq auto-save-default nil)
+(setq-default show-trailing-whitespace nil)
 
+(setq auto-save-dir (concat user-emacs-directory "auto-saves"))
+
+(make-directory auto-save-dir t)
 (setq backup-by-copying t)
+(setq backup-directory-alist `((".*" . "~/.emacs.d/auto-saves")))
+(setq auto-save-file-name-transforms `((".*" , "~/.emacs.d/auto-saves" t)))
 
-;; when a file is updated outside emacs, make it update if it's already opened in emacs
-(global-auto-revert-mode 1)
 
-;; keep a list of recently opened files
-;;(require 'recentf)
-;;(recentf-mode 1)
+(use-package beacon
+  :ensure t
+  :config
+  (beacon-mode 1)
+  (remove-hook 'beacon-dont-blink-predicates #'beacon--compilation-mode-p)
+  )
 
-;; save/restore opened files from last session
-;;(desktop-save-mode 1)
+(use-package editorconfig
+  :ensure t
+  :config
+  (editorconfig-mode 1))
 
-;; wrap long lines by word boundary, and arrow up/down move by visual line, etc
-(global-visual-line-mode 1)
+(use-package smooth-scrolling
+  :ensure t
+  :config
+  (smooth-scrolling-mode 1)
+  )
+
+(use-package so-long
+  :ensure t
+  :config
+  (global-so-long-mode 1))
+
+(use-package ws-butler
+  :ensure t
+  :config
+  (ws-butler-global-mode 1)
+  )
+
+(setq mouse-yank-at-point t)
+(add-hook 'write-file-hooks 'delete-trailing-whitespace nil t)
+(which-function-mode)
+
+(window-divider-mode)
+(setq window-divider-default-places t)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -94,31 +154,8 @@ This command does not push text to `kill-ring'."
     (delete-region p1 p2)))
 ;;----------------------------------------------------------------------
 
-;;----------------------------------------------------------------------
-; hide scrollbars and menus
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
-(menu-bar-mode -1)
-;;----------------------------------------------------------------------
-
-;;----------------------------------------------------------------------
 
 
-;; set tramp ssh
-(setq tramp-default-method "ssh")
-
-;; shell shortcut
-(global-set-key [f1] 'shell)
-(delete-selection-mode 1)
-
-;; revert buffer
-(global-set-key [f6] 'revert-buffer)
-
-;; prevent delete of shell prompt
-(setq comint-prompt-read-only t)
-
-
-;;----------------------------------------------------------------------
 
 
 (defun cleanup-region (beg end)
@@ -134,18 +171,17 @@ This command does not push text to `kill-ring'."
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 
-(setq column-number-mode t)
-(setq-default indent-tabs-mode nil)
 
 
-;; set style 
+;; set style
 (set-foreground-color "white")
 ;;(set-background-color "#1D1F20")
 (set-background-color "#2d2b27")
-(set-face-attribute 'default nil :height 100)
+(set-face-attribute 'default nil :height 120)
 
 (defun my-shell-mode-hook ()
-  (setq comint-input-ring-file-name "~/.bash_history")
+  (setq comint-input-ring-file-name "~/dotfiles/bash_history")
   (comint-read-input-ring t))
 
 (provide 'init-ui)
+;;; init-ui.el ends here

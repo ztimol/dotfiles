@@ -16,8 +16,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=100000
-HISTFILESIZE=20000
+HISTSIZE=1000000
+HISTFILESIZE=200000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -117,66 +117,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-function regex() {
-    REGEX=$1
-    docker ps --no-trunc | grep ${REGEX} | awk '{print $1}'
-}
-
-function regexa() {
-    REGEX=$1
-    docker ps -a --no-trunc | grep ${REGEX} | awk '{print $1}'
-}
-
-function edock() {
-    DOCKER_IMAGE=$(docker ps | grep `regex $1`  | awk '{print $2}')
-    echo "${DOCKER_IMAGE}"
-    docker exec -it `regex $1` bash
-}
-
-function pdock() {
-    DOCKER_IMAGE=$(docker ps | grep `regex $1`  | awk '{print $2}')
-    echo "${DOCKER_IMAGE}"
-    docker exec -it `regex $1` psql -U postgres
-}
-
-function pdock-db_reset() {
-    DOCKER_IMAGE=$(docker ps | grep `regex $1`  | awk '{print $2}')
-    echo "${DOCKER_IMAGE}"
-    docker exec -it `regex $1` psql -U postgres -d postgres -c "DROP DATABASE stint_api;"
-    docker exec -it `regex $1` psql -U postgres -d postgres -c "CREATE DATABASE stint_api;"
-    docker exec -it `regex $1` psql -U postgres -d postgres -c "GRANT ALL PRIVILEGES ON DATABASE stint_api TO dev;"
-}
-
-function rdock() {
-    DOCKER_IMAGE=$(docker ps | grep `regex $1`  | awk '{print $2}')
-    echo "${DOCKER_IMAGE}"
-    docker exec -it `regex $1` python3 api/manage.py runserver 0.0.0.0:8009
-}
-
-function ldock() {
-    docker logs -f `regexa $1`
-}
-
-function dockps() {
-    REGEX=$1
-    docker ps | grep ${REGEX}
-}
-
-function dockpsa() {
-    REGEX=$1
-    docker ps -a | grep ${REGEX}
-}
-
-function regexstop() {
-    REGEX=$1
-    docker ps -a | grep ${REGEX}
-}
-
-function dockstop() {
-    docker stop `regexstop $1`
-}
-
-export PATH=$PATH:~/.CBv2.1.34/
+export PATH=$PATH:~/.CBv2.1.44/
 #export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH=$PATH:~/.NAMD_2.13_Linux-x86_64-multicore/
 alias vmdt='vmd -dispdev text'
@@ -184,7 +125,12 @@ alias vmdt='vmd -dispdev text'
 
 #eval "$(rbenv init -)"
 
-g09root=/home/timol/
-GAUSS_SCRDIR=$g09root/g09/scratch/
-export g09root GAUSS_SCRDIR
-. $g09root/g09/bsd/g09.profile
+#g09root=/home/timol
+#GAUSS_SCRDIR=$g09root/g09/scratch/
+#export g09root GAUSS_SCRDIR
+#. $g09root/g09/bsd/g09.profile
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+

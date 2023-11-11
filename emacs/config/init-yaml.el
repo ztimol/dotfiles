@@ -5,4 +5,9 @@
   (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
   )
 
+
+(use-package ansible-vault
+  :ensure t
+  )
+
 (provide 'init-yaml)

@@ -2,6 +2,8 @@
   :ensure t
   :config
   (global-flycheck-mode)
+  (setq flycheck-checker-error-threshold 10000)
+  (setq warning-suppress-types '((flycheck)))
   )
 
 (use-package flycheck-posframe

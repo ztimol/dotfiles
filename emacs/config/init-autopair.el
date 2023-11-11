@@ -2,5 +2,3 @@
   :ensure t
   )
 (provide 'init-autopair)
-
-

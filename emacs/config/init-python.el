@@ -1,16 +1,24 @@
+(use-package py-isort
+  :ensure t
+  )
+
 (use-package blacken
   :ensure t
-  :ensure-system-package (black . "pip3 install black")
+  :config
+  ;; (add-hook 'python-mode-hook 'blacken-mode)
   )
 
-
-(use-package python
+(use-package lsp-pyright
   :ensure t
-  :init
-  (add-hook 'python-mode-hook 'blacken-mode)
-  (fset 'pdb "import pdb; pdb.set_trace()")
-  :bind (:map python-mode-map
-              ("C-x , p" . pdb))
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp))))  ; or lsp-deferred
+(use-package pyenv-mode
+  :ensure t
   )
+
+;; (use-package pyenv-mode-auto
+;;   :ensure t
+;;   )
 
 (provide 'init-python)
