@@ -21,6 +21,7 @@
   (setq lsp-prefer-capf t)
   (setq lsp-idle-delay 0.500)
   (setq lsp-file-watch-threshold 10000)
+  (setq lsp-headerline-breadcrumb-enable nil)
   )
 
 (with-eval-after-load 'js
